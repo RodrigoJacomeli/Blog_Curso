@@ -1,17 +1,25 @@
-const Express = require('express')
-const App = Express()
-const BodyParser = require('body-parser')
-const connection = require('./database/database')
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+const connection = require('./src/database/database')
+
+// Controllers
+const categoriesController = require('./src/controller/categories/CategoriesController')
+const articlesController = require('./src/controller/articles/articlesController')
+
+// Models
+const Category = require('./src/Models/categories/Category')
+const Article = require('./src/Models/articles/Article')
 
 // View Engine
-App.set('view engine', 'ejs')
+app.set('view engine', 'ejs')
 
 // Static
-App.use(Express.static('public'))
+app.use(express.static('public'))
 
 // Body Parser
-App.use(BodyParser.urlencoded({ extended: false }))
-App.use(BodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // DataBase
 connection
@@ -22,10 +30,13 @@ connection
         console.log(error)
     })
 
-App.get('/', (req, res) => {
+app.use('/', categoriesController)
+app.use('/', articlesController)
+
+app.get('/', (req, res) => {
     res.render('index')
 })
 
-App.listen(3000, () => {
+app.listen(3000, () => {
     console.log('Server is running!!!')
 })

@@ -1,0 +1,19 @@
+version: '3'
+
+networks: 
+  local:
+
+services:
+  db:
+    image: mariadb
+    container_name: database_mariadb
+    restart: always
+    networks: 
+      - local
+    ports: 
+      - 3306:3306
+    environment: 
+      MYSQL_ROOT_PASSWORD: templars
+      MYSQL_USER: rodrigo
+      MYSQL_PASSWORD: admin4590
+  

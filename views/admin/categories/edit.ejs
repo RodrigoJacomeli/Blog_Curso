@@ -1,0 +1,27 @@
+<!--Incluindo Header-->
+<%- include('../../partials/header.ejs') %>
+
+    <!--Incluindo Navbar-->
+    <%- include('../../partials/navbar.ejs') %>
+
+        <div class="container">
+            <hr>
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        Category Edit
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/admin/categories/save">
+                        <input type="text" name="title" id="title" placeholder="Ex: BodyKit"
+                            title="Write the title of category" tabindex="1" required minlength="4" maxlength="32" value="<%= category.title %>"
+                            class="form-control">
+                        <button type="submit" class="btn btn-success mt-3" title="Click to register category" tabindex="2">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--Incluindo Header-->
+        <%- include('../../partials/footer.ejs') %>
